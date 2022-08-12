@@ -1,0 +1,77 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>TaskOn</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Agregar Tarea</h3>
+                    <form [formGroup]='form' (ngSubmit)='addTask()'>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-thumbtack"
+                                    [class.green-icon]="this.form.get('title')?.valid"
+                                    [class.red-icon]="this.form.get('title')?.invalid && this.form.get('title')?.touched"></i>
+                            </span>
+                            <input formControlName="title" type="text" class="form-control" placeholder="Nombre de la Tarea" aria-label="TaskTitle"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-bullseye"
+                                    [class.green-icon]="this.form.get('object')?.valid"
+                                    [class.red-icon]="this.form.get('object')?.invalid && this.form.get('object')?.touched"></i>
+                            </span>
+                            <input formControlName="object" type="text" maxlength="200" class="form-control" placeholder="Objetivo de la tarea" aria-label="TaskObject"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-table"
+                                    [class.green-icon]="this.form.get('date')?.valid"
+                                    [class.red-icon]="this.form.get('date')?.invalid && this.form.get('date')?.touched"></i>
+                            </span>
+                            <input formControlName="date" type="text" maxlength="10" class="form-control" placeholder="Fecha de entrega" aria-label="TaskDate"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-dark" type="submit">
+                                <i class="fas fa-database"></i>&nbsp;Agregar
+                            </button>                           
+                        </div>
+                    </form>                 
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-body ">
+                    <h3 class="text-center">Listado de tareas</h3>                        
+                    <div 
+                        *ngFor='let list of taskList; let i = index' 
+                        class="taskCard"                        
+                    >
+                        <h5 class="card-title"> 
+                            {{list.title}}
+                        </h5>
+                        <p class="card-text">{{list.object}}</p>
+                        <p>{{list.date}}</p>                
+                        <i class="far fa-edit text-info"
+                        (click)="editTask(list)"></i>                 
+                        <i class="far fa-trash-alt text-danger"
+                        (click)='deleteTask(i)'></i>
+                    </div>                                                    
+                </div>                                    
+            </div>
+        </div>      
+    </div>
+</div>
